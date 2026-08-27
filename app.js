@@ -1,3 +1,17 @@
+const companies = [
+  {
+    name: "Clientèle Limited",
+    sector: "Financial Services · Legal & Short-Term Insurance",
+    logo: "images/logos/clientele.png",
+    headline: "A large, regulated insurer moving about as fast as regulation lets it.",
+    body: "Clientèle Legal sits inside Clientèle Limited, a JSE-listed insurer that also runs Clientèle General, its short-term insurance arm. The group reported total assets of roughly R20.1 billion in its 2025 annual report, with about R10.7 billion held in financial assets at fair value and R875 million in cash.<br><br><strong>Asset Density Score (ADS - 5):</strong> Insurance balance sheets always look asset-heavy, since premiums get invested long before claims come due. That doesn't mean the company is stuck. What matters more is how much of that R20.1 billion is genuinely tied up versus sitting in liquid instruments, and with a large chunk in fair-value assets plus real cash on hand, Clientèle has more room to move than a typical asset-heavy company. That's why this sits in the middle rather than the high end.<br><br><strong>Opportunity Window Score (OWS - 7):</strong> Legal insurance isn't as chaotic as retail or tech, but it isn't sleepy either. Cost-of-living pressure keeps pushing people toward affordable legal cover, South Africa's legal system is expensive enough that access stays a real gap, and insurers are shifting hard toward app- and WhatsApp-based claims. None of that closes in days, but the market moves often enough to reward a company that keeps up.<br><br><strong>Response Velocity Score (RVS - 5):</strong> This is the hardest one to pin down from public information alone — internal approval times and launch speed just aren't disclosed anywhere. What's visible: Clientèle runs digital claims through WhatsApp and its app, and it picked up 1Life Insurance through acquisition. Both point to a company that does adapt. But it's still a regulated insurer, and regulation puts a real ceiling on how fast any insurer can move next to an unregulated digital competitor. Moderate is the fair read here — not fast, not stuck.<br><br><small><strong>Data Sources & Referencing:</strong><br>• <em>Balance sheet figures:</em> Clientèle Limited Integrated Annual Report 2025; JSE financial disclosures.<br>• <em>Digital & acquisition activity:</em> Clientèle claims process disclosures (WhatsApp/app claims); 1Life Insurance acquisition reporting.<br>• <em>Sector context:</em> Statistics South Africa household expenditure data; South African Reserve Bank economic reporting.</small>",
+    ads: 5,
+    ows: 7,
+    rvs: 5,
+    conclusion: "Clientèle isn't missing opportunities because something's wrong with it — it's a large, regulated insurer behaving the way large, regulated insurers do. The gap here is structural, not a performance failure: a smaller, unregulated digital competitor can simply move on a legal-access opportunity faster than a listed insurer ever will."
+  }
+];
+
 /* ==========================================================================
    DDI RENDER LOGIC
    --------------------------------------------------------------------------
@@ -75,7 +89,7 @@ function buildCompanyCard(company) {
       <span class="ddi-caption"><span class="state-tag ${state.tag}">${state.label}</span></span>
     </div>
 
-    <p class="case-conclusion"><strong>Conclusion</strong>${company.conclusion}</p>
+    <p class="case-conclusion"><strong>Conclusion</strong><br>${company.conclusion}</p>
   `;
 
   // If a logo path was given but the file can't be found, fall back
