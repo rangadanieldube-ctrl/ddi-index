@@ -53,6 +53,18 @@ const companies = [
     conclusion: "Clientèle isn't missing opportunities because something's wrong with it — it's a large, regulated insurer behaving the way large, regulated insurers do. The gap here is structural, not a performance failure: a smaller, unregulated digital competitor can simply move on a legal-access opportunity faster than a listed insurer ever will."
   }
 
+  ,{
+    name: "Amazon.com, Inc.",
+    sector: "E-Commerce, Cloud Computing & Logistics",
+    logo: "images/logos/amazon.png",
+    headline: "Massive infrastructure that acts like rocket fuel instead of dead weight.",
+    body: "Amazon reported roughly $717 billion in revenue for 2025, with AWS alone growing 20% year-over-year to about $129 billion.<br><br><strong>Asset Density Score (ADS - 4):</strong> On paper, Amazon looks like the heaviest company imaginable — fulfillment centers, data centers, warehouses, property and equipment north of $357 billion. But none of that behaves like dead weight. AWS is the clearest example: Amazon pours billions into server infrastructure once, then rents that same capacity out to millions of customers around the world. The size is real, but it's built to move, not sit still.<br><br><strong>Opportunity Window Score (OWS - 10):</strong> Amazon doesn't operate in one fast-moving sector. It operates in several at once — cloud computing, AI infrastructure, digital retail, logistics, advertising, streaming. Each of those is being reshaped constantly, and Amazon sits inside all of them at the same time. It's hard to find a company more exposed to short-window opportunity than this one.<br><br><strong>Response Velocity Score (RVS - 9):</strong> AWS is the case study here. Amazon didn't wait for a competitor to solve enterprise cloud computing — it took its own internal server problem and turned it into a business almost nobody saw coming until it was already dominant. The company runs on small, independent teams that can ship without waiting on layers of approval, and it's kept using that same playbook: Whole Foods, Twitch, Ring, MGM, and now AI infrastructure like Bedrock and Trainium.<br><br><small><strong>Data Sources & Referencing:</strong><br>• <em>Financials:</em> Amazon.com, Inc. Form 10-K Annual Report (2025); Amazon 2025 Letter to Shareholders.<br>• <em>Segment performance:</em> AWS revenue and growth figures, Amazon Investor Relations.<br>• <em>Strategic pattern:</em> Amazon acquisition and product-expansion history (AWS, Whole Foods, Twitch, Ring, MGM, Bedrock/Trainium).</small>",
+    ads: 4,
+    ows: 10,
+    rvs: 9,
+    conclusion: "Amazon's edge was never really its size — plenty of companies have money, people, and infrastructure and still move slowly. What sets it apart is turning a customer problem into an experiment, then infrastructure, then a market position, faster than almost anyone else operating at this scale. Given how disruptive its markets are, this is close to the best result the index can produce."
+  }
+
   /* Add the next company below this line. Example:
 
   ,{
