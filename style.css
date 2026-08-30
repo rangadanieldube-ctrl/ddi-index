@@ -508,6 +508,26 @@
   }
   .illustrative-note b{ color: var(--ink-dim); }
 
+  .scroll-cue{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--serif-num);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--velocity);
+    margin-bottom: 28px;
+    transition: opacity 0.4s ease;
+  }
+  .scroll-cue svg{
+    animation: scroll-cue-bounce 1.6s ease-in-out infinite;
+  }
+  @keyframes scroll-cue-bounce{
+    0%, 100%{ transform: translateY(0); opacity: 0.6; }
+    50%{ transform: translateY(4px); opacity: 1; }
+  }
+
   .case-grid{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
