@@ -93,25 +93,11 @@ function buildCompanyCard(company) {
   return card;
 }
 
-function buildPlaceholderCard() {
-  const card = document.createElement("div");
-  card.className = "case-card case-card--empty";
-  card.innerHTML = `
-    <div class="case-top"><h3>Next report</h3></div>
-    <div class="case-sector">Slot reserved · TBD</div>
-    <div class="empty-slot-body">
-      <p>Add the next company to <code>data.js</code> and it appears here automatically.</p>
-    </div>
-  `;
-  return card;
-}
-
 function renderCompanies() {
   const grid = document.getElementById("case-grid");
   if (!grid) return;
   grid.innerHTML = "";
   companies.forEach(company => grid.appendChild(buildCompanyCard(company)));
-  grid.appendChild(buildPlaceholderCard());
 
   // Update the "scroll to see all ratings" cue with the real count,
   // and hide it once the visitor actually starts scrolling.
