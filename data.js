@@ -65,6 +65,18 @@ const companies = [
     conclusion: "Amazon's edge was never really its size — plenty of companies have money, people, and infrastructure and still move slowly. What sets it apart is turning a customer problem into an experiment, then infrastructure, then a market position, faster than almost anyone else operating at this scale. Given how disruptive its markets are, this is close to the best result the index can produce."
   }
 
+  ,{
+    name: "Pick n Pay Stores Limited",
+    sector: "Consumer Retailing · Grocery & Quick Commerce",
+    logo: "images/logos/pick-n-pay.png",
+    headline: "A R12.5 billion lifeline bought time — it didn't buy speed.",
+    body: "Pick n Pay carries roughly R45.5 billion in total assets, and in late 2024 pulled off a major two-step recapitalisation: a R4 billion rights offer plus the Boxer IPO, together raising R12.5 billion and clearing the group's historical debt burden.<br><br><strong>Asset Density Score (ADS - 7):</strong> That R45.5 billion asset base isn't functioning as a growth engine right now — it's more of a structural anchor. The group posted R120.3 billion in turnover for FY26, but a large, heavy retail footprint carrying a struggling core segment reads as weight the company has to manage rather than capital it can freely deploy.<br><br><strong>Opportunity Window Score (OWS - 9):</strong> Quick commerce and discount grocery in South Africa are moving fast, and margins in the space are tight enough that being early or late genuinely changes outcomes. Boxer is proof the group can win in this environment — it's carrying group growth almost on its own, and the asap! digital platform saw real momentum through its Mr D partnership. The window is real and it's closing quickly on anyone who hesitates.<br><br><strong>Response Velocity Score (RVS - 4):</strong> The capital raise itself was fast — necessary, well-executed, and it bought breathing room. But raising money to survive isn't the same as capturing a market opportunity ahead of competitors, and the segment actually exposed to that opportunity is the core supermarket business. That segment's trading loss widened to R1.0 billion in the recently published FY26 results. The turnaround is happening too slowly to make use of the financial room the IPO just created.<br><br><small><strong>Data Sources & Referencing:</strong><br>• <em>Recapitalisation & balance sheet:</em> Pick n Pay Stores Limited rights offer and Boxer IPO disclosures (2024).<br>• <em>Segment performance:</em> Pick n Pay Group FY26 results (group turnover, core supermarket trading loss).<br>• <em>Digital & Boxer performance:</em> asap!/Mr D partnership reporting; Boxer segment growth disclosures.</small>",
+    ads: 7,
+    ows: 9,
+    rvs: 4,
+    conclusion: "Pick n Pay solved its balance sheet problem faster than it's solving its retail problem. The Boxer IPO gave the group real financial room to work with, but the core supermarket business — the part actually sitting in a fast-closing opportunity window — is still losing more money, not less. Capital bought time. It didn't buy speed."
+  }
+
   /* Add the next company below this line. Example:
 
   ,{
