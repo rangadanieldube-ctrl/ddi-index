@@ -112,6 +112,21 @@ function renderCompanies() {
   grid.innerHTML = "";
   companies.forEach(company => grid.appendChild(buildCompanyCard(company)));
   grid.appendChild(buildPlaceholderCard());
+
+  // Update the "scroll to see all ratings" cue with the real count,
+  // and hide it once the visitor actually starts scrolling.
+  const cueText = document.getElementById("scroll-cue-text");
+  const cue = document.getElementById("scroll-cue");
+  if (cueText) {
+    const count = companies.length;
+    cueText.textContent = count === 1
+      ? "1 company rated — scroll to see it"
+      : `${count} companies rated — scroll to see all`;
+  }
+  if (cue) {
+    const hideCue = () => { cue.style.opacity = "0"; window.removeEventListener("scroll", hideCue); };
+    window.addEventListener("scroll", hideCue, { passive: true });
+  }
 }
 
 document.addEventListener("DOMContentLoaded", renderCompanies);
