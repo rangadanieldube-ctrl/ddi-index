@@ -223,22 +223,72 @@
     50%{ background-position: 100% 50%; }
     100%{ background-position: 0% 50%; }
   }
-  .droplet{
-    width: 128px;
-    height: 128px;
-    background: radial-gradient(circle at 32% 28%, var(--energy-soft), transparent 55%),
-                linear-gradient(150deg, var(--energy), var(--velocity) 130%);
-    border-radius: 62% 38% 55% 45% / 55% 48% 52% 45%;
-    filter: drop-shadow(0 0 50px rgba(124,255,196,0.55)) drop-shadow(0 0 80px rgba(62,215,200,0.3));
-    animation: morph 7s ease-in-out infinite;
-    transition: transform 0.5s cubic-bezier(.4,0,.2,1), opacity 0.5s ease;
+
+  /* The droplet itself is a metaball effect: a blur pushed through a hard
+     contrast filter forces the soft edges of separate blobs to fuse into
+     one liquid surface wherever they get close, and pull apart into
+     distinct droplets when they drift away from each other — the same
+     technique used for CSS "gooey" effects. */
+  .metaball-wrap{
     position: relative;
+    width: 150px;
+    height: 150px;
     z-index: 2;
+    filter:
+      contrast(26)
+      brightness(1.05)
+      drop-shadow(0 0 46px rgba(124,255,196,0.45))
+      drop-shadow(0 0 80px rgba(62,215,200,0.28));
+    transition: transform 0.5s cubic-bezier(.4,0,.2,1), opacity 0.5s ease;
   }
-  .droplet.is-collapsing{
+  .metaball-wrap.is-collapsing{
     transform: scale(0.15);
-    opacity: 0.25;
+    opacity: 0.2;
   }
+  .metaball-blur{
+    position: absolute;
+    inset: 0;
+    filter: blur(16px);
+  }
+  .ball{
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(150deg, var(--energy), var(--velocity) 130%);
+  }
+  .ball-a{
+    width: 84px;
+    height: 84px;
+    top: 34px;
+    left: 22px;
+    animation: ball-a-drift 9s ease-in-out infinite;
+  }
+  .ball-b{
+    width: 56px;
+    height: 56px;
+    top: 48px;
+    left: 74px;
+    animation: ball-b-drift 7s ease-in-out infinite;
+  }
+  .ball-c{
+    width: 38px;
+    height: 38px;
+    top: 18px;
+    left: 80px;
+    animation: ball-c-drift 11s ease-in-out infinite;
+  }
+  @keyframes ball-a-drift{
+    0%,100%{ transform: translate(0,0) scale(1); }
+    50%{ transform: translate(16px,-10px) scale(1.08); }
+  }
+  @keyframes ball-b-drift{
+    0%,100%{ transform: translate(0,0) scale(1); }
+    50%{ transform: translate(-18px,10px) scale(0.88); }
+  }
+  @keyframes ball-c-drift{
+    0%,100%{ transform: translate(0,0) scale(1); }
+    50%{ transform: translate(-12px,-16px) scale(1.15); }
+  }
+
   .droplet-label{
     position: absolute;
     bottom: 14px;
@@ -249,11 +299,6 @@
     letter-spacing: 0.08em;
     color: var(--ink-faint);
     text-transform: uppercase;
-  }
-  @keyframes morph{
-    0%,100%{ border-radius: 62% 38% 55% 45% / 55% 48% 52% 45%; }
-    33%{ border-radius: 40% 60% 45% 55% / 48% 55% 45% 52%; }
-    66%{ border-radius: 55% 45% 62% 38% / 42% 50% 50% 58%; }
   }
 
   /* ---------- SECTION SHELL ---------- */
