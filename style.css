@@ -224,17 +224,15 @@
     100%{ background-position: 0% 50%; }
   }
 
-  /* The droplet is a metaball effect: a blur pushed through a hard contrast
-     filter forces soft blob edges to fuse into one liquid surface wherever
-     they drift close together, and separate into distinct droplets as they
-     move apart — the same technique used for CSS "gooey" effects. The
-     stage has no background of its own, so the contrast filter runs on
-     transparency and the page's own grid pattern shows through naturally. */
   .metaball-collapse-wrap{
     position: absolute;
     width: 210px;
     height: 210px;
     z-index: 2;
+    overflow: hidden;
+    border-radius: 50%;
+    background: black;
+    filter: contrast(25);
     transition: transform 0.5s cubic-bezier(.4,0,.2,1), opacity 0.5s ease;
   }
   .metaball-collapse-wrap.is-collapsing{
@@ -242,15 +240,7 @@
     opacity: 0.2;
   }
   .metaball-stage{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    overflow: hidden;
-    filter:
-      contrast(25)
-      drop-shadow(0 0 46px rgba(124,255,196,0.45))
-      drop-shadow(0 0 80px rgba(62,215,200,0.28));
+    background: inherit;
     animation: metaball-spin 7s ease-in-out infinite;
   }
   @keyframes metaball-spin{
@@ -265,7 +255,7 @@
     left: 50%;
     top: 50%;
     margin: -50px;
-    background: rgba(124,255,196,0.9);
+    background: rgba(124,255,196,.9);
     border-radius: 50%;
     filter: blur(25px);
     animation: meta-move 12s infinite alternate ease-in-out;
