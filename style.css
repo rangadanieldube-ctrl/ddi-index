@@ -30,17 +30,27 @@
   }
 
   body{
-    background: var(--bg);
+    background-color: var(--bg);
     color: var(--ink);
     font-family: var(--body);
     font-size: 16px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    background-image:
-      linear-gradient(var(--lattice) 1px, transparent 1px),
-      linear-gradient(90deg, var(--lattice) 1px, transparent 1px);
-    background-size: 64px 64px;
-    background-position: center top;
+    background-image: repeating-linear-gradient(
+      135deg,
+      var(--bg) 0px,
+      var(--bg) 90px,
+      var(--bg-raised) 90px,
+      var(--bg-raised) 91px,
+      var(--bg) 91px,
+      var(--bg) 180px
+    );
+    background-size: 254px 254px;
+    animation: stripe-drift 40s linear infinite;
+  }
+  @keyframes stripe-drift{
+    0%{ background-position: 0 0; }
+    100%{ background-position: 254px 254px; }
   }
 
   a{ color: inherit; }
@@ -200,10 +210,14 @@
     position: absolute;
     inset: 0;
     border: 1px solid var(--line);
-    background-image:
-      linear-gradient(var(--lattice-strong) 1px, transparent 1px),
-      linear-gradient(90deg, var(--lattice-strong) 1px, transparent 1px);
-    background-size: 28px 28px;
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent 0px,
+      transparent 24px,
+      var(--lattice-strong) 24px,
+      var(--lattice-strong) 25px
+    );
+    background-size: 68px 68px;
     mask-image: radial-gradient(circle at center, black 40%, transparent 78%);
   }
   .droplet-halo{
@@ -572,18 +586,25 @@
     gap: 24px;
   }
   .case-card{
-    background: var(--bg-panel);
-    border: 1px solid var(--line);
+    background: rgba(19, 24, 36, 0.55);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(233, 236, 243, 0.14);
     border-radius: var(--radius);
     padding: 28px;
     display: flex;
     flex-direction: column;
     text-decoration: none;
     color: inherit;
-    transition: transform 0.22s ease;
+    transition: transform 0.22s ease, border-color 0.22s ease;
     cursor: pointer;
     position: relative;
     z-index: 0;
+    box-shadow:
+      0 8px 32px rgba(0,0,0,0.35),
+      inset 0 1px 0 rgba(255,255,255,0.3),
+      inset 1px 0 0 rgba(255,255,255,0.12),
+      inset 0 -1px 0 rgba(255,255,255,0.05);
   }
   .case-card::before{
     content: '';
@@ -600,16 +621,9 @@
     animation: card-glow-spin 6s linear infinite;
     transition: opacity 0.3s ease;
   }
-  .case-card::after{
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--bg-panel);
-    border-radius: var(--radius);
-    z-index: -1;
-  }
   .case-card:hover{
     transform: translateY(-5px);
+    border-color: rgba(233, 236, 243, 0.28);
   }
   .case-card:hover::before{
     opacity: 0.85;
@@ -626,8 +640,7 @@
     min-height: 220px;
     cursor: default;
   }
-  .case-card--empty::before,
-  .case-card--empty::after{
+  .case-card--empty::before{
     content: none;
   }
   .case-card--empty:hover{
