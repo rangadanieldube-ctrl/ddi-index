@@ -187,7 +187,8 @@
     inset: 0;
     border-radius: 6em;
     z-index: -1;
-    transition: transform 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease, background 0.2s ease;
   }
   .btn:hover{
     transform: translateY(-3px);
@@ -198,30 +199,31 @@
   .btn-primary{
     background: var(--ink);
     color: var(--bg);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, background 0.2s ease;
   }
   .btn-primary::after{ background: var(--velocity); }
   .btn-primary:hover{
+    background: var(--velocity);
     color: var(--bg);
     box-shadow: 0 10px 26px rgba(62,215,200,0.35);
   }
   .btn-primary:hover::after{
-    transform: scaleX(1.35) scaleY(1.5);
-    opacity: 0;
+    animation: btn-ripple 0.6s ease-out;
+  }
+  @keyframes btn-ripple{
+    0%{ opacity: 0.9; transform: scale(1); }
+    100%{ opacity: 0; transform: scale(1.5); }
   }
   .btn-ghost{
     background: transparent;
     border-color: var(--line-strong);
     color: var(--ink);
   }
-  .btn-ghost::after{ background: var(--energy-soft); }
+  .btn-ghost::after{ content: none; }
   .btn-ghost:hover{
     border-color: var(--energy);
     color: var(--energy);
     box-shadow: 0 10px 26px rgba(255,106,61,0.2);
-  }
-  .btn-ghost:hover::after{
-    transform: scaleX(1.35) scaleY(1.5);
-    opacity: 0;
   }
 
   /* droplet visual */
@@ -237,8 +239,9 @@
     inset: 0;
     border: 1px solid var(--line);
     background-image:
-      repeating-radial-gradient(circle at 0 0, transparent 0, transparent 8px, var(--lattice-strong) 8px, var(--lattice-strong) 9px);
-    background-size: 24px 24px;
+      linear-gradient(var(--lattice-strong) 1px, transparent 1px),
+      linear-gradient(90deg, var(--lattice-strong) 1px, transparent 1px);
+    background-size: 28px 28px;
     mask-image: radial-gradient(circle at center, black 40%, transparent 78%);
   }
   .droplet-halo{
