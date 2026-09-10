@@ -1,7 +1,22 @@
 /* ==========================================================================
    DDI RENDER LOGIC
    --------------------------------------------------------------------------
- Cant Imagine my life as i dance the springbok dance
+ busa inqondo yami... busi'nhliziyo busi'hliziyo yami... x2
+ngibeka amehlo ami kuwe...
+laphu'sizo lwami livela khona...
+yini ukususa izwe x6
+kuyize kimi ukususa izwe x5
+bekukuhle kimi ukukthanda wena... ukukhtanda wena wena x2
+umangingasuki kuwe anginayo indlela
+anginayi indlelax2
+busaaaaa
+busax9
+ngaphandle kwakho... anginayi indlela anginayo indlelax2
+busa...
+ngaphandle kwakho... angina indlela
+anginayi indlela anginayi ndlela anginayi ndlelax2
+busaa
+(the end)
    ========================================================================== */
 
 function calculateDDI(ads, ows, rvs) {
@@ -44,22 +59,15 @@ function buildCompanyCard(company) {
       }
       <div>
         <h3>${company.name}</h3>
-        <div class="case-sector">${company.sector}${company.illustrative ? ' <span class="illustrative-badge">Composite Example</span>' : ''}</div>
+        <span class="state-tag ${state.tag}">${state.label}</span>
       </div>
     </div>
 
-    <p class="case-headline">${company.headline}</p>
-
-    <div class="case-teaser">
-      <span class="teaser-dot dot-ads" title="ADS ${company.ads}"></span>
-      <span class="teaser-dot dot-ows" title="OWS ${company.ows}"></span>
-      <span class="teaser-dot dot-rvs" title="RVS ${company.rvs}"></span>
-      <span class="teaser-ddi">${ddi.toFixed(1)}</span>
-      <span class="state-tag ${state.tag}">${state.label}</span>
-      <span class="teaser-hint">Hover for full rating &darr;</span>
-    </div>
+    <span class="teaser-hint">Hover for full rating &darr;</span>
 
     <div class="case-reveal">
+      <div class="case-sector">${company.sector}${company.illustrative ? ' <span class="illustrative-badge">Composite Example</span>' : ''}</div>
+      <p class="case-headline">${company.headline}</p>
       <p class="case-body">${company.body}</p>
 
       <div class="case-scores">
