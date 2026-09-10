@@ -1,107 +1,225 @@
 /* ==========================================================================
    DDI RENDER LOGIC
    --------------------------------------------------------------------------
-busa inqondo yami... busi'nhliziyo busi'hliziyo yami... x2
-ngibeka amehlo ami kuwe...
-laphu'sizo lwami livela khona...
-yini ukususa izwe x6
-kuyize kimi ukususa izwe x5
-bekukuhle kimi ukukthanda wena... ukukhtanda wena wena x2
-umangingasuki kuwe anginayo indlela
-anginayi indlelax2
-busaaaaa
-busax9
-ngaphandle kwakho... anginayi indlela anginayo indlelax2
-busa...
-ngaphandle kwakho... angina indlela
-anginayi indlela anginayi ndlela anginayi ndlelax2
-busaa
+   dfughjfkdisetityktflxyivhk hgfghfd fouvyxiccyrcf  fuvof o yuiu ygvtvtvt  t thr thank Anankin I am your father 
    ========================================================================== */
+
 
 function calculateDDI(ads, ows, rvs) {
   return (ads * ows) / rvs;
 }
 
+
 function getState(ddi) {
-  if (ddi < 2.0)  return { label: "Sub-Dropleton",     tag: "state-sub"   };
-  if (ddi < 5.0)  return { label: "Transitional",      tag: "state-trans" };
-  if (ddi < 8.0)  return { label: "Dropleton State",   tag: "state-drop"  };
-  return              { label: "Critical Dropleton", tag: "state-crit" };
+
+  if (ddi < 2.0)
+    return { label: "Sub-Dropleton", tag: "state-sub" };
+
+  if (ddi < 5.0)
+    return { label: "Transitional", tag: "state-trans" };
+
+  if (ddi < 8.0)
+    return { label: "Dropleton State", tag: "state-drop" };
+
+  return {
+    label: "Critical Dropleton",
+    tag: "state-crit"
+  };
+
 }
+
+
 
 function scoreBarWidth(score) {
-  // scores run 1-10, this turns them into a 0-100% bar width
-  return Math.max(0, Math.min(100, score * 10)) + "%";
+
+  return Math.max(
+    0,
+    Math.min(100, score * 10)
+  ) + "%";
+
 }
+
+
 
 function getInitials(name) {
-  return name.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join("");
+
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0,2)
+    .map(w => w[0].toUpperCase())
+    .join("");
+
 }
+
+
 
 function slugify(name) {
-  return name.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g,"-")
+    .replace(/(^-|-$)/g,"");
+
 }
 
+
+
+
 function buildCompanyCard(company) {
-  const ddi = calculateDDI(company.ads, company.ows, company.rvs);
+
+
+  const ddi = calculateDDI(
+    company.ads,
+    company.ows,
+    company.rvs
+  );
+
+
   const state = getState(ddi);
-  const hasLogo = company.logo && company.logo.trim() !== "";
+
+
+  const hasLogo =
+    company.logo &&
+    company.logo.trim() !== "";
+
+
 
   const card = document.createElement("a");
+
+
   card.className = "case-card";
-  card.href = `company.html?c=${encodeURIComponent(slugify(company.name))}`;
+
+
+  card.href =
+    `company.html?c=${encodeURIComponent(slugify(company.name))}`;
+
+
 
   card.innerHTML = `
 
+
     <span class="card-glow"></span>
+
 
     <div class="case-content">
 
+
+
       <div class="case-dots">
-        <span class="dot-ads" title="Asset Density Score: ${company.ads}"></span>
-        <span class="dot-ows" title="Opportunity Window Score: ${company.ows}"></span>
-        <span class="dot-rvs" title="Response Velocity Score: ${company.rvs}"></span>
+
+        <span 
+        class="dot-ads"
+        title="Asset Density Score: ${company.ads}">
+        </span>
+
+
+        <span 
+        class="dot-ows"
+        title="Opportunity Window Score: ${company.ows}">
+        </span>
+
+
+        <span 
+        class="dot-rvs"
+        title="Response Velocity Score: ${company.rvs}">
+        </span>
+
+
       </div>
+
+
 
 
       <div class="case-top">
 
+
         ${
           hasLogo
-          ? `<img class="case-logo" src="${company.logo}" alt="${company.name} logo">`
-          : `<div class="case-logo-fallback">${getInitials(company.name)}</div>`
+
+          ?
+
+          `<img 
+          class="case-logo"
+          src="${company.logo}"
+          alt="${company.name} logo">`
+
+          :
+
+          `<div class="case-logo-fallback">
+          ${getInitials(company.name)}
+          </div>`
+
         }
 
+
+
         <div>
-          <h3>${company.name}</h3>
+
+
+          <h3>
+            ${company.name}
+          </h3>
+
+
+
           <span class="state-tag ${state.tag}">
             ${state.label}
           </span>
+
+
         </div>
+
 
       </div>
 
 
+
+
       <span class="teaser-hint">
-        Hover for full rating &darr;
+        Hover for full rating ↓
       </span>
+
+
+
 
 
       <div class="case-reveal">
 
+
         <div class="case-sector">
+
+
           ${company.sector}
+
+
           ${
             company.illustrative
-            ? ' <span class="illustrative-badge">Composite Example</span>'
-            : ''
+
+            ?
+
+            `<span class="illustrative-badge">
+            Composite Example
+            </span>`
+
+            :
+
+            ""
+
           }
+
+
         </div>
+
+
+
 
 
         <p class="case-headline">
           ${company.headline}
         </p>
+
 
 
         <p class="case-body">
@@ -110,119 +228,325 @@ function buildCompanyCard(company) {
 
 
 
+
+
+
         <div class="case-scores">
 
-          <div class="score-row ads">
-            <span class="label">ADS</span>
 
-            <span class="bar-track">
-              <span class="bar-fill"
-              style="width:${scoreBarWidth(company.ads)}">
-              </span>
+
+          <div class="score-row ads">
+
+
+            <span class="label">
+              ADS
             </span>
 
-            <span class="value">${company.ads}</span>
+
+            <span class="bar-track">
+
+              <span 
+              class="bar-fill"
+              style="width:${scoreBarWidth(company.ads)}">
+              </span>
+
+            </span>
+
+
+            <span class="value">
+              ${company.ads}
+            </span>
+
+
           </div>
+
+
+
 
 
 
           <div class="score-row ows">
-            <span class="label">OWS</span>
 
-            <span class="bar-track">
-              <span class="bar-fill"
-              style="width:${scoreBarWidth(company.ows)}">
-              </span>
+
+            <span class="label">
+              OWS
             </span>
 
-            <span class="value">${company.ows}</span>
+
+            <span class="bar-track">
+
+
+              <span
+              class="bar-fill"
+              style="width:${scoreBarWidth(company.ows)}">
+              </span>
+
+
+            </span>
+
+
+            <span class="value">
+              ${company.ows}
+            </span>
+
+
           </div>
+
+
+
 
 
 
           <div class="score-row rvs">
-            <span class="label">RVS</span>
 
-            <span class="bar-track">
-              <span class="bar-fill"
-              style="width:${scoreBarWidth(company.rvs)}">
-              </span>
+
+            <span class="label">
+              RVS
             </span>
 
-            <span class="value">${company.rvs}</span>
+
+
+            <span class="bar-track">
+
+
+              <span
+              class="bar-fill"
+              style="width:${scoreBarWidth(company.rvs)}">
+              </span>
+
+
+            </span>
+
+
+            <span class="value">
+              ${company.rvs}
+            </span>
+
+
           </div>
 
+
+
         </div>
+
+
+
 
 
 
         <div class="ddi-readout">
 
+
           <span class="ddi-number">
             ${ddi.toFixed(1)}
           </span>
 
+
+
           <span class="ddi-caption">
+
+
             <span class="state-tag ${state.tag}">
               ${state.label}
             </span>
+
+
           </span>
+
+
 
         </div>
 
 
 
+
+
+
+
         <p class="case-conclusion">
-          <strong>Conclusion</strong>
+
+          <strong>
+            Conclusion
+          </strong>
+
           <br>
+
           ${company.conclusion}
+
+
         </p>
+
+
 
 
       </div>
 
+
+
+
     </div>
+
 
   `;
 
 
-  const logoImg = card.querySelector(".case-logo");
+
+
+  const logoImg =
+    card.querySelector(".case-logo");
+
+
 
   if (logoImg) {
-    logoImg.addEventListener("error", () => {
-      const fallback = document.createElement("div");
 
-      fallback.className = "case-logo-fallback";
-      fallback.textContent = getInitials(company.name);
 
-      logoImg.replaceWith(fallback);
-    });
+    logoImg.addEventListener(
+      "error",
+      () => {
+
+
+        const fallback =
+        document.createElement("div");
+
+
+
+        fallback.className =
+        "case-logo-fallback";
+
+
+
+        fallback.textContent =
+        getInitials(company.name);
+
+
+
+        logoImg.replaceWith(fallback);
+
+
+      }
+    );
+
+
   }
+
 
 
   return card;
+
+
 }
+
+
+
+
+
 
 function renderCompanies() {
-  const grid = document.getElementById("case-grid");
-  if (!grid) return;
-  grid.innerHTML = "";
-  companies.forEach(company => grid.appendChild(buildCompanyCard(company)));
 
-  // Update the "scroll to see all ratings" cue with the real count,
-  // and hide it once the visitor actually starts scrolling.
-  const cueText = document.getElementById("scroll-cue-text");
-  const cue = document.getElementById("scroll-cue");
+
+  const grid =
+  document.getElementById("case-grid");
+
+
+
+  if (!grid)
+    return;
+
+
+
+  grid.innerHTML = "";
+
+
+
+  companies.forEach(
+    company =>
+    grid.appendChild(
+      buildCompanyCard(company)
+    )
+  );
+
+
+
+
+
+
+  const cueText =
+  document.getElementById("scroll-cue-text");
+
+
+
+  const cue =
+  document.getElementById("scroll-cue");
+
+
+
+
   if (cueText) {
-    const count = companies.length;
-    cueText.textContent = count === 1
-      ? "1 company rated — scroll to see it"
-      : `${count} companies rated — scroll to see all`;
+
+
+    const count =
+    companies.length;
+
+
+
+    cueText.textContent =
+    count === 1
+
+    ?
+
+    "1 company rated — scroll to see it"
+
+    :
+
+    `${count} companies rated — scroll to see all`;
+
+
   }
+
+
+
+
+
   if (cue) {
-    const hideCue = () => { cue.style.opacity = "0"; window.removeEventListener("scroll", hideCue); };
-    window.addEventListener("scroll", hideCue, { passive: true });
+
+
+    const hideCue = () => {
+
+
+      cue.style.opacity = "0";
+
+
+      window.removeEventListener(
+        "scroll",
+        hideCue
+      );
+
+
+    };
+
+
+
+    window.addEventListener(
+      "scroll",
+      hideCue,
+      {
+        passive:true
+      }
+    );
+
+
   }
+
+
+
 }
 
-document.addEventListener("DOMContentLoaded", renderCompanies);
+
+
+
+
+
+document.addEventListener(
+  "DOMContentLoaded",
+  renderCompanies
+);
