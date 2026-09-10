@@ -1,7 +1,7 @@
 /* ==========================================================================
    DDI COMPANY RATINGS
    --------------------------------------------------------------------------
-   This is the only file you should need to edit to publish a new rating.
+  Heres a guide Hers like A A  A  A Guide .
 
    To add a company: copy one whole { ... } block below (including the
    comma after it), paste it above the closing "];", and change the values.
