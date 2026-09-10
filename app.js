@@ -1,9 +1,7 @@
 /* ==========================================================================
    DDI RENDER LOGIC
    --------------------------------------------------------------------------
-   You shouldn't normally need to edit this file. It reads the "companies"
-   array from data.js, works out each DDI score and state, and builds the
-   rating cards on the home page.
+ Cant Imagine my life as i dance the springbok dance
    ========================================================================== */
 
 function calculateDDI(ads, ows, rvs) {
@@ -51,31 +49,43 @@ function buildCompanyCard(company) {
     </div>
 
     <p class="case-headline">${company.headline}</p>
-    <p class="case-body">${company.body}</p>
 
-    <div class="case-scores">
-      <div class="score-row ads">
-        <span class="label">ADS</span>
-        <span class="bar-track"><span class="bar-fill" style="width:${scoreBarWidth(company.ads)}"></span></span>
-        <span class="value">${company.ads}</span>
-      </div>
-      <div class="score-row ows">
-        <span class="label">OWS</span>
-        <span class="bar-track"><span class="bar-fill" style="width:${scoreBarWidth(company.ows)}"></span></span>
-        <span class="value">${company.ows}</span>
-      </div>
-      <div class="score-row rvs">
-        <span class="label">RVS</span>
-        <span class="bar-track"><span class="bar-fill" style="width:${scoreBarWidth(company.rvs)}"></span></span>
-        <span class="value">${company.rvs}</span>
-      </div>
-    </div>
-    <div class="ddi-readout">
-      <span class="ddi-number">${ddi.toFixed(1)}</span>
-      <span class="ddi-caption"><span class="state-tag ${state.tag}">${state.label}</span></span>
+    <div class="case-teaser">
+      <span class="teaser-dot dot-ads" title="ADS ${company.ads}"></span>
+      <span class="teaser-dot dot-ows" title="OWS ${company.ows}"></span>
+      <span class="teaser-dot dot-rvs" title="RVS ${company.rvs}"></span>
+      <span class="teaser-ddi">${ddi.toFixed(1)}</span>
+      <span class="state-tag ${state.tag}">${state.label}</span>
+      <span class="teaser-hint">Hover for full rating &darr;</span>
     </div>
 
-    <p class="case-conclusion"><strong>Conclusion</strong>${company.conclusion}</p>
+    <div class="case-reveal">
+      <p class="case-body">${company.body}</p>
+
+      <div class="case-scores">
+        <div class="score-row ads">
+          <span class="label">ADS</span>
+          <span class="bar-track"><span class="bar-fill" style="width:${scoreBarWidth(company.ads)}"></span></span>
+          <span class="value">${company.ads}</span>
+        </div>
+        <div class="score-row ows">
+          <span class="label">OWS</span>
+          <span class="bar-track"><span class="bar-fill" style="width:${scoreBarWidth(company.ows)}"></span></span>
+          <span class="value">${company.ows}</span>
+        </div>
+        <div class="score-row rvs">
+          <span class="label">RVS</span>
+          <span class="bar-track"><span class="bar-fill" style="width:${scoreBarWidth(company.rvs)}"></span></span>
+          <span class="value">${company.rvs}</span>
+        </div>
+      </div>
+      <div class="ddi-readout">
+        <span class="ddi-number">${ddi.toFixed(1)}</span>
+        <span class="ddi-caption"><span class="state-tag ${state.tag}">${state.label}</span></span>
+      </div>
+
+      <p class="case-conclusion"><strong>Conclusion</strong><br>${company.conclusion}</p>
+    </div>
   `;
 
   // If a logo path was given but the file can't be found, fall back
