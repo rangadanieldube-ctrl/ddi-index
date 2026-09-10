@@ -50,68 +50,155 @@ function buildCompanyCard(company) {
   const card = document.createElement("a");
   card.className = "case-card";
   card.href = `company.html?c=${encodeURIComponent(slugify(company.name))}`;
+
   card.innerHTML = `
-    <div class="case-dots">
-      <span class="dot-ads" title="Asset Density Score: ${company.ads}"></span>
-      <span class="dot-ows" title="Opportunity Window Score: ${company.ows}"></span>
-      <span class="dot-rvs" title="Response Velocity Score: ${company.rvs}"></span>
-    </div>
 
-    <div class="case-top">
-      ${hasLogo
-        ? `<img class="case-logo" src="${company.logo}" alt="${company.name} logo">`
-        : `<div class="case-logo-fallback">${getInitials(company.name)}</div>`
-      }
-      <div>
-        <h3>${company.name}</h3>
-        <span class="state-tag ${state.tag}">${state.label}</span>
-      </div>
-    </div>
+    <span class="card-glow"></span>
 
-    <span class="teaser-hint">Hover for full rating &darr;</span>
+    <div class="case-content">
 
-    <div class="case-reveal">
-      <div class="case-sector">${company.sector}${company.illustrative ? ' <span class="illustrative-badge">Composite Example</span>' : ''}</div>
-      <p class="case-headline">${company.headline}</p>
-      <p class="case-body">${company.body}</p>
-
-      <div class="case-scores">
-        <div class="score-row ads">
-          <span class="label">ADS</span>
-          <span class="bar-track"><span class="bar-fill" style="width:${scoreBarWidth(company.ads)}"></span></span>
-          <span class="value">${company.ads}</span>
-        </div>
-        <div class="score-row ows">
-          <span class="label">OWS</span>
-          <span class="bar-track"><span class="bar-fill" style="width:${scoreBarWidth(company.ows)}"></span></span>
-          <span class="value">${company.ows}</span>
-        </div>
-        <div class="score-row rvs">
-          <span class="label">RVS</span>
-          <span class="bar-track"><span class="bar-fill" style="width:${scoreBarWidth(company.rvs)}"></span></span>
-          <span class="value">${company.rvs}</span>
-        </div>
-      </div>
-      <div class="ddi-readout">
-        <span class="ddi-number">${ddi.toFixed(1)}</span>
-        <span class="ddi-caption"><span class="state-tag ${state.tag}">${state.label}</span></span>
+      <div class="case-dots">
+        <span class="dot-ads" title="Asset Density Score: ${company.ads}"></span>
+        <span class="dot-ows" title="Opportunity Window Score: ${company.ows}"></span>
+        <span class="dot-rvs" title="Response Velocity Score: ${company.rvs}"></span>
       </div>
 
-      <p class="case-conclusion"><strong>Conclusion</strong><br>${company.conclusion}</p>
+
+      <div class="case-top">
+
+        ${
+          hasLogo
+          ? `<img class="case-logo" src="${company.logo}" alt="${company.name} logo">`
+          : `<div class="case-logo-fallback">${getInitials(company.name)}</div>`
+        }
+
+        <div>
+          <h3>${company.name}</h3>
+          <span class="state-tag ${state.tag}">
+            ${state.label}
+          </span>
+        </div>
+
+      </div>
+
+
+      <span class="teaser-hint">
+        Hover for full rating &darr;
+      </span>
+
+
+      <div class="case-reveal">
+
+        <div class="case-sector">
+          ${company.sector}
+          ${
+            company.illustrative
+            ? ' <span class="illustrative-badge">Composite Example</span>'
+            : ''
+          }
+        </div>
+
+
+        <p class="case-headline">
+          ${company.headline}
+        </p>
+
+
+        <p class="case-body">
+          ${company.body}
+        </p>
+
+
+
+        <div class="case-scores">
+
+          <div class="score-row ads">
+            <span class="label">ADS</span>
+
+            <span class="bar-track">
+              <span class="bar-fill"
+              style="width:${scoreBarWidth(company.ads)}">
+              </span>
+            </span>
+
+            <span class="value">${company.ads}</span>
+          </div>
+
+
+
+          <div class="score-row ows">
+            <span class="label">OWS</span>
+
+            <span class="bar-track">
+              <span class="bar-fill"
+              style="width:${scoreBarWidth(company.ows)}">
+              </span>
+            </span>
+
+            <span class="value">${company.ows}</span>
+          </div>
+
+
+
+          <div class="score-row rvs">
+            <span class="label">RVS</span>
+
+            <span class="bar-track">
+              <span class="bar-fill"
+              style="width:${scoreBarWidth(company.rvs)}">
+              </span>
+            </span>
+
+            <span class="value">${company.rvs}</span>
+          </div>
+
+        </div>
+
+
+
+        <div class="ddi-readout">
+
+          <span class="ddi-number">
+            ${ddi.toFixed(1)}
+          </span>
+
+          <span class="ddi-caption">
+            <span class="state-tag ${state.tag}">
+              ${state.label}
+            </span>
+          </span>
+
+        </div>
+
+
+
+        <p class="case-conclusion">
+          <strong>Conclusion</strong>
+          <br>
+          ${company.conclusion}
+        </p>
+
+
+      </div>
+
     </div>
+
   `;
 
-  // If a logo path was given but the file can't be found, fall back
-  // to the initials badge instead of showing a broken image icon.
+
   const logoImg = card.querySelector(".case-logo");
+
   if (logoImg) {
     logoImg.addEventListener("error", () => {
       const fallback = document.createElement("div");
+
       fallback.className = "case-logo-fallback";
       fallback.textContent = getInitials(company.name);
+
       logoImg.replaceWith(fallback);
     });
   }
+
 
   return card;
 }
