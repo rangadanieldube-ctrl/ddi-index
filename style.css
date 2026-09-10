@@ -618,56 +618,65 @@
     flex-direction: column;
     text-decoration: none;
     color: inherit;
-    transition: transform 0.22s ease, border-color 0.22s ease;
     cursor: pointer;
     position: relative;
-    z-index: 0;
-  }
-  .case-card::before{
-    content: '';
-    position: absolute;
-    top: -3px; left: -3px;
-    width: calc(100% + 6px);
-    height: calc(100% + 6px);
-    background: linear-gradient(45deg, var(--glow-a), var(--velocity), #1FFFA3, var(--glow-a));
-    background-size: 300% 300%;
-    border-radius: calc(var(--radius) + 3px);
-    filter: blur(14px);
-    opacity: 0;
-    z-index: -2;
-    animation: card-glow-spin 6s linear infinite;
-    transition: opacity 0.3s ease;
-  }
-  .case-card::after{
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--bg-panel);
-    border-radius: var(--radius);
-    z-index: -1;
+    overflow: hidden;
+    max-height: 232px;
+    transition: max-height 0.55s ease, transform 0.25s ease, border-color 0.25s ease;
   }
   .case-card:hover{
-    transform: translateY(-5px);
-    border-color: rgba(233, 236, 243, 0.28);
+    max-height: 900px;
+    transform: translateY(-4px);
+    border-color: var(--line-strong);
   }
-  .case-card:hover::before{
-    opacity: 0.85;
+  .case-teaser{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    font-family: var(--serif-num);
   }
-  @keyframes card-glow-spin{
-    0%{ background-position: 0% 50%; }
-    50%{ background-position: 100% 50%; }
-    100%{ background-position: 0% 50%; }
+  .teaser-dot{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-ads{ background: var(--energy); }
+  .dot-ows{ background: #FFB199; }
+  .dot-rvs{ background: var(--velocity); }
+  .teaser-ddi{
+    font-size: 15px;
+    color: var(--ink);
+    margin-left: 4px;
+  }
+  .teaser-hint{
+    margin-left: auto;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    opacity: 1;
+    transition: opacity 0.25s ease;
+  }
+  .case-card:hover .teaser-hint{
+    opacity: 0;
+  }
+  .case-reveal{
+    margin-top: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.1s;
+  }
+  .case-card:hover .case-reveal{
+    opacity: 1;
   }
   .case-card--empty{
     background: transparent;
     border: 1px dashed var(--line-strong);
     justify-content: center;
     min-height: 220px;
+    max-height: none;
     cursor: default;
-  }
-  .case-card--empty::before,
-  .case-card--empty::after{
-    content: none;
   }
   .case-card--empty:hover{
     transform: none;
