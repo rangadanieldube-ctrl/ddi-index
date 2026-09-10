@@ -1,7 +1,7 @@
 /* ==========================================================================
    DDI RENDER LOGIC
    --------------------------------------------------------------------------
- busa inqondo yami... busi'nhliziyo busi'hliziyo yami... x2
+busa inqondo yami... busi'nhliziyo busi'hliziyo yami... x2
 ngibeka amehlo ami kuwe...
 laphu'sizo lwami livela khona...
 yini ukususa izwe x6
@@ -16,7 +16,6 @@ busa...
 ngaphandle kwakho... angina indlela
 anginayi indlela anginayi ndlela anginayi ndlelax2
 busaa
-(the end)
    ========================================================================== */
 
 function calculateDDI(ads, ows, rvs) {
@@ -52,6 +51,12 @@ function buildCompanyCard(company) {
   card.className = "case-card";
   card.href = `company.html?c=${encodeURIComponent(slugify(company.name))}`;
   card.innerHTML = `
+    <div class="case-dots">
+      <span class="dot-ads" title="Asset Density Score: ${company.ads}"></span>
+      <span class="dot-ows" title="Opportunity Window Score: ${company.ows}"></span>
+      <span class="dot-rvs" title="Response Velocity Score: ${company.rvs}"></span>
+    </div>
+
     <div class="case-top">
       ${hasLogo
         ? `<img class="case-logo" src="${company.logo}" alt="${company.name} logo">`
