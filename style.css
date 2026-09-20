@@ -609,48 +609,255 @@
     grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
     gap: 24px;
   }
+  /* ==========================================================
+     CARD SHELL — expanding grid card, adapted from a 3-column
+     product-card reference. Closed/open heights are variable
+     (var(--card-open)) rather than a fixed value, since research
+     length varies a lot between companies.
+     ========================================================== */
   .case-card{
-    background: var(--bg-panel);
+    --card-closed: 168px;
+    --card-open: 640px;
+    position: relative;
+    display: block;
+    max-height: var(--card-closed);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--ink);
+    background-color: var(--bg-panel);
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    padding: 28px;
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    max-height: 232px;
-    transition: max-height 0.55s ease, transform 0.25s ease, border-color 0.25s ease;
+    padding: 20px 20px 22px;
+    transition: max-height 0.6s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
   .case-card:hover{
-    max-height: 900px;
+    max-height: var(--card-open);
     transform: translateY(-4px);
     border-color: var(--line-strong);
+    box-shadow: 0 24px 48px -12px rgba(0,0,0,0.5);
   }
-  .teaser-hint{
-    display: block;
-    margin-top: 14px;
+  .case-card::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at 50% 0%, rgba(124,255,196,0.14), transparent 55%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+  }
+  .case-card:hover::before{
+    opacity: 1;
+  }
+
+  .case-inner-grid{
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 14px;
+    position: relative;
+    z-index: 2;
+    transition: grid-template-columns 0.5s ease;
+  }
+  .case-card:hover .case-inner-grid{
+    grid-template-columns: 1fr 1.3fr 1.7fr;
+  }
+
+  /* column 1: always-visible identity */
+  .case-col--text{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+  }
+  .case-heading{
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin: 6px 0 0;
+  }
+  .case-meta{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
+    margin-top: 12px;
+    text-transform: uppercase;
     font-family: var(--serif-num);
-    font-size: 10.5px;
+  }
+  .case-mark{
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .case-meta .state-tag{
+    font-size: 10px;
+    padding: 2px 8px;
+  }
+
+  /* column 2: logo */
+  .case-col--media{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .case-logo{
+    width: 100%;
+    max-width: 64px;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    border-radius: var(--radius);
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    padding: 8px;
+  }
+  .case-logo-fallback{
+    width: 100%;
+    max-width: 64px;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius);
+    background: linear-gradient(150deg, var(--energy), var(--velocity) 130%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 16px;
+    color: #0A0D13;
+  }
+
+  /* column 3: full detail, hidden until hover */
+  .case-col--details{
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateX(8px);
+    pointer-events: none;
+    transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s;
+    max-height: calc(var(--card-open) - 60px);
+    overflow-y: auto;
+  }
+  .case-card:hover .case-col--details{
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+  .case-title{
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0 0 10px;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+  .case-index{
+    color: var(--glow-a);
+    font-family: var(--serif-num);
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+  }
+  .case-description{
+    margin: 0 0 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-dim);
+  }
+  .case-description strong{
+    display: block;
+    font-family: var(--serif-num);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--velocity);
+    margin: 12px 0 4px;
+  }
+  .case-stats{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-family: var(--serif-num);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .case-price{ color: var(--ink); font-size: 20px; font-weight: 500; }
+  .case-status{ color: var(--ink-dim); }
+
+  .case-actions{
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .case-btn{
+    border: none;
+    font-family: var(--serif-num);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .case-btn--primary{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: var(--radius);
+    background: var(--glow-a);
+    color: #0A0D13;
+    font-size: 11px;
+  }
+  .case-btn--icon{
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius);
+    background: var(--ink);
+    color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .case-variants{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+  }
+  .case-swatches{
+    display: flex;
+    gap: 6px;
+  }
+  .case-swatch{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .case-count{
+    font-family: var(--serif-num);
+    font-size: 10px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--ink-faint);
-    opacity: 1;
-    transition: opacity 0.25s ease;
   }
-  .case-card:hover .teaser-hint{
-    opacity: 0;
-  }
-  .case-reveal{
-    margin-top: 20px;
-    opacity: 0;
-    transition: opacity 0.4s ease 0.1s;
-  }
-  .case-card:hover .case-reveal{
-    opacity: 1;
-  }
+
   .case-card--empty{
     background: transparent;
     border: 1px dashed var(--line-strong);
@@ -665,57 +872,10 @@
     box-shadow: none;
   }
   .case-card--empty h3{ color: var(--ink-faint); }
-  .case-card--empty .case-sector{ color: var(--ink-faint); }
   .empty-slot-body p{
     font-size: 13.5px;
     color: var(--ink-faint);
     line-height: 1.6;
-  }
-  .case-top{
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 6px;
-  }
-  .case-top h3{
-    margin-bottom: 6px;
-  }
-  .case-logo{
-    width: 44px;
-    height: 44px;
-    object-fit: contain;
-    border-radius: var(--radius);
-    background: var(--bg-raised);
-    border: 1px solid var(--line);
-    padding: 6px;
-    flex-shrink: 0;
-  }
-  .case-logo-fallback{
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius);
-    background: linear-gradient(150deg, var(--energy), var(--velocity) 130%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 15px;
-    color: #0A0D13;
-    flex-shrink: 0;
-  }
-  .case-card h3{
-    font-family: var(--display);
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 1.3;
-  }
-  .case-sector{
-    font-family: var(--serif-num);
-    font-size: 11.5px;
-    color: var(--ink-faint);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
   }
   .illustrative-badge{
     display: inline-block;
@@ -727,85 +887,11 @@
     font-size: 10px;
     letter-spacing: 0.04em;
   }
-  .case-headline{
-    font-family: var(--display);
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--ink);
-    line-height: 1.4;
-    margin: 18px 0 10px;
-  }
-  .case-body{
-    font-size: 14px;
-    color: var(--ink-dim);
-    line-height: 1.65;
-    margin-bottom: 20px;
-  }
-  .case-conclusion{
-    font-size: 14px;
-    color: var(--ink-dim);
-    line-height: 1.65;
-    margin-top: 18px;
-    padding-top: 18px;
-    border-top: 1px solid var(--line);
-  }
-  .case-conclusion strong{
-    display: block;
-    font-family: var(--serif-num);
-    font-size: 10.5px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--velocity);
-    margin-bottom: 6px;
-  }
-  .case-scores{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  .score-row{
-    display: grid;
-    grid-template-columns: 40px 1fr 28px;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--serif-num);
-    font-size: 12px;
-  }
-  .score-row .label{ color: var(--ink-faint); }
-  .score-row .bar-track{
-    height: 5px;
-    background: rgba(233,236,243,0.08);
-    border-radius: 3px;
-    overflow: hidden;
-    display: block;
-  }
-  .score-row .bar-fill{ display: block; height: 100%; border-radius: 3px; }
-  .score-row.ads .bar-fill{ background: var(--energy); }
-  .score-row.ows .bar-fill{ background: #FFB199; }
-  .score-row.rvs .bar-fill{ background: var(--velocity); }
-  .score-row .value{ text-align: right; color: var(--ink); }
 
-  .ddi-readout{
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    padding-top: 18px;
-    border-top: 1px solid var(--line);
-    margin-bottom: 16px;
-  }
-  .ddi-readout .ddi-number{
-    font-family: var(--serif-num);
-    font-size: 30px;
-    color: var(--ink);
-    font-weight: 500;
-  }
-  .ddi-readout .ddi-caption{
-    font-family: var(--serif-num);
-    font-size: 10.5px;
-    color: var(--ink-faint);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+  @media (prefers-reduced-motion: reduce){
+    .case-card, .case-inner-grid, .case-col--details, .case-card::before{
+      transition-duration: 0.001ms !important;
+    }
   }
   .case-card p.observation{
     font-size: 14px;
