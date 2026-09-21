@@ -604,18 +604,9 @@
     50%{ transform: translateY(4px); opacity: 1; }
   }
 
-  /* Rating cards.
-     Every grid row has a FIXED height. A hovered card grows out of its row and
-     floats over the cards below it, so nothing else on the page moves (no
-     layout jump, no hover flicker). */
   .case-grid{
-    --case-row: 176px;
-    position: relative;
     display: grid;
-    /* min(310px,100%) stops the grid overflowing phones narrower than ~375px */
-    grid-template-columns: repeat(auto-fit, minmax(min(310px, 100%), 1fr));
-    grid-auto-rows: var(--case-row);
-    align-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
     gap: 24px;
   }
   .case-card{
@@ -630,43 +621,14 @@
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    min-width: 0;
-    min-height: var(--case-row);
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    max-height: 232px;
+    transition: max-height 0.55s ease, transform 0.25s ease, border-color 0.25s ease;
   }
-  .case-card:is(:hover, :focus-visible){
-    z-index: 5;
+  .case-card:hover{
+    max-height: 900px;
     transform: translateY(-4px);
     border-color: var(--line-strong);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
   }
-  .card-glow{
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0;
-    background: radial-gradient(120% 80% at 0% 0%, var(--velocity-soft), transparent 60%);
-    transition: opacity 0.3s ease;
-  }
-  .case-card:is(:hover, :focus-visible) .card-glow{ opacity: 1; }
-  .case-content{ position: relative; z-index: 1; }
-  .case-dots{
-    position: absolute;
-    top: 2px;
-    right: 0;
-    display: flex;
-    gap: 5px;
-  }
-  .case-dots span{
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    display: block;
-  }
-  .case-dots .dot-ads{ background: var(--energy); }
-  .case-dots .dot-ows{ background: #FFB199; }
-  .case-dots .dot-rvs{ background: var(--velocity); }
-
   .teaser-hint{
     display: block;
     margin-top: 14px;
@@ -678,48 +640,29 @@
     opacity: 1;
     transition: opacity 0.25s ease;
   }
-  .case-card:is(:hover, :focus-visible) .teaser-hint{ opacity: 0; }
-
-  /* Smooth height reveal: animates a 0fr -> 1fr grid track, so it always
-     takes exactly as long as the real content needs (max-height didn't). */
-  .case-reveal{
-    display: grid;
-    grid-template-rows: 0fr;
+  .case-card:hover .teaser-hint{
     opacity: 0;
-    transition: grid-template-rows 0.45s ease, opacity 0.35s ease;
   }
-  .case-reveal__inner{
-    min-height: 0;
-    overflow: hidden;
+  .case-reveal{
+    margin-top: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.1s;
   }
-  .case-reveal__inner > :first-child{ margin-top: 20px; }
-  .case-card:is(:hover, :focus-visible) .case-reveal{
-    grid-template-rows: 1fr;
+  .case-card:hover .case-reveal{
     opacity: 1;
-    transition-delay: 0s, 0.1s;
   }
-
-  /* Touch screens can't hover: show everything, no fixed row height. */
-  @media (hover: none){
-    .case-grid{ grid-auto-rows: auto; align-items: stretch; }
-    .case-card{ min-height: 0; }
-    .case-card:hover{ transform: none; box-shadow: none; }
-    .case-reveal{ grid-template-rows: 1fr; opacity: 1; }
-    .teaser-hint{ display: none; }
-  }
-
   .case-card--empty{
     background: transparent;
     border: 1px dashed var(--line-strong);
     justify-content: center;
-    align-self: stretch;
+    min-height: 220px;
+    max-height: none;
     cursor: default;
   }
   .case-card--empty:hover{
     transform: none;
     border-color: var(--line-strong);
     box-shadow: none;
-    z-index: auto;
   }
   .case-card--empty h3{ color: var(--ink-faint); }
   .case-card--empty .case-sector{ color: var(--ink-faint); }
@@ -733,7 +676,6 @@
     align-items: center;
     gap: 14px;
     margin-bottom: 6px;
-    padding-right: 42px;   /* room for the three score dots */
   }
   .case-top h3{
     margin-bottom: 6px;
@@ -1036,413 +978,3 @@
     font-size: 12px;
     color: var(--ink-faint);
   }
-
-/* ============================================================
-   SHOWCASE - STICKY CARD STACK
-   Each card is `position: sticky`. Scrolling pulls the next card up over
-   the one before it, which stays parked underneath. Pure CSS: no GSAP, no
-   pinning, nothing to switch off. There is NO background colour change
-   between cards.
-   Below 861px (or with "reduce motion") the cards are a normal list.
-   ============================================================ */
-
-.showcase {
-  --deck-top: 96px;                        /* app.js sets this to nav height + 16 */
-  --card-h: clamp(440px, 62vh, 500px);     /* height of one card */
-  --card-gap: clamp(80px, 16vh, 180px);    /* space between cards = how much of the next card you see coming */
-  --hold: 30vh;                            /* scroll spent holding on the last card */
-  --peek: 10px;                            /* how much of each earlier card shows above the top one */
-  position: relative;
-  width: 100%;
-  margin: 0 auto 40px;
-  padding: 0;
-  border-top: none;
-  background: transparent;
-}
-
-/* the old coloured wash is gone on purpose */
-.showcase__backgrounds { display: none; }
-
-/* Deck width: never wider than the page column, never wider than the screen. */
-.showcase__stack {
-  position: relative;
-  width: min(100% - 32px, 980px);
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.showcase-card {
-  position: relative;
-  min-width: 0;
-  padding: 24px;
-  background: var(--bg-panel);             /* same colour on every card, must stay opaque to cover the one below */
-  color: var(--ink);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-
-@media (min-width: 861px) and (prefers-reduced-motion: no-preference) {
-  .showcase__stack { display: block; }
-  .showcase__stack::after {                /* extra runway so the last card holds before the page moves on */
-    content: "";
-    display: block;
-    height: var(--hold);
-  }
-  .showcase-card {
-    position: sticky;
-    top: calc(var(--deck-top) + min(var(--i, 0), 3) * var(--peek));
-    height: var(--card-h);
-    margin-bottom: var(--card-gap);      /* keep this identical on EVERY card, incl. the last, or the pile fans out when it leaves */
-  }
-  .showcase-card__heading {
-    display: -webkit-box;
-    -webkit-line-clamp: 8;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-}
-
-/* ----- card layout ----- */
-.showcase-card__grid {
-  display: grid;
-  /* minmax(0, ...) lets columns shrink; plain 1fr can't go below its content
-     width and was stretching the card past its edges */
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: 20px;
-  height: 100%;
-}
-
-.showcase-card__col { min-width: 0; min-height: 0; }
-
-.showcase-card__col--text {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 8px 0 0;
-}
-.showcase-card__heading {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: clamp(18px, 1.9vw, 28px);
-  line-height: 1.12;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin: 0;
-  overflow-wrap: anywhere;
-}
-.showcase-card__brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-top: 1px solid var(--line);
-  padding-top: 14px;
-  font-family: var(--serif-num);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-}
-.showcase-card__brand-dot {
-  width: 9px; height: 9px;
-  border-radius: 60% 40% 55% 45%;
-  background: linear-gradient(135deg, var(--energy), var(--velocity));
-  flex-shrink: 0;
-}
-
-.showcase-card__col--score {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: var(--bg-raised);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
-  padding: 24px;
-}
-.showcase-card__col--score::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--lattice-strong) 1px, transparent 1px),
-    linear-gradient(90deg, var(--lattice-strong) 1px, transparent 1px);
-  background-size: 24px 24px;
-  -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
-          mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
-  pointer-events: none;
-  opacity: 0.6;
-}
-.showcase-card__index {
-  position: absolute;
-  top: 16px; left: 16px;
-  font-family: var(--serif-num);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--ink-faint);
-  z-index: 2;
-}
-.showcase-card__logo-stage {
-  position: relative;
-  z-index: 2;
-  width: 80px; height: 80px;
-  margin-bottom: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--bg-panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 10px;
-}
-.showcase-card__logo-stage img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-.showcase-card__logo-fallback {
-  width: 100%; height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 22px;
-  color: var(--bg);
-  background: linear-gradient(150deg, var(--energy), var(--velocity) 130%);
-  border-radius: calc(var(--radius) - 1px);
-}
-.showcase-card__score {
-  position: relative;
-  z-index: 2;
-  font-family: var(--serif-num);
-  font-size: clamp(40px, 5vw, 64px);
-  font-weight: 500;
-  line-height: 1;
-  color: var(--ink);
-  letter-spacing: -0.02em;
-}
-.showcase-card__score-label {
-  position: relative;
-  z-index: 2;
-  font-family: var(--serif-num);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-top: 8px;
-  margin-bottom: 14px;
-}
-.showcase-card__col--score .state-tag { position: relative; z-index: 2; }
-
-.showcase-card__col--details {
-  display: flex;
-  flex-direction: column;
-  padding: 8px 0 0;
-}
-.showcase-card__title {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin: 0 0 12px;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
-  overflow-wrap: anywhere;
-}
-.showcase-card__desc {
-  font-size: 13.5px;
-  line-height: 1.55;
-  color: var(--ink-dim);
-  margin: 0 0 18px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--line);
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.showcase-card__bars {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 18px;
-}
-.showcase-card__bar {
-  display: grid;
-  grid-template-columns: 34px 1fr 26px;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--serif-num);
-  font-size: 11px;
-}
-.showcase-card__bar-label { color: var(--ink-faint); letter-spacing: 0.04em; }
-.showcase-card__bar-track {
-  height: 4px;
-  background: rgba(233, 236, 243, 0.08);
-  border-radius: 2px;
-  overflow: hidden;
-  display: block;
-}
-.showcase-card__bar-fill { display: block; height: 100%; border-radius: 2px; }
-.showcase-card__bar--ads .showcase-card__bar-fill { background: var(--energy); }
-.showcase-card__bar--ows .showcase-card__bar-fill { background: #FFB199; }
-.showcase-card__bar--rvs .showcase-card__bar-fill { background: var(--velocity); }
-.showcase-card__bar-value { color: var(--ink); text-align: right; }
-
-.showcase-card__actions {
-  display: flex;
-  gap: 8px;
-  margin-top: auto;
-}
-.showcase-card__btn {
-  font-family: var(--serif-num);
-  font-size: 11.5px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 12px 14px;
-  border-radius: var(--radius);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-}
-.showcase-card__btn--primary {
-  flex: 1;
-  background: var(--ink);
-  color: var(--bg);
-}
-.showcase-card__btn--primary:hover {
-  background: var(--velocity);
-  color: var(--bg);
-}
-.showcase-card__btn--ghost {
-  border-color: var(--line-strong);
-  color: var(--ink);
-  width: 48px;
-}
-.showcase-card__btn--ghost:hover {
-  border-color: var(--energy);
-  color: var(--energy);
-}
-
-/* ----- 01 02 03 jump buttons: bottom-centre, only visible while the deck is pinned ----- */
-.showcase-nav {
-  position: fixed;
-  bottom: 24px;
-  left: 0; right: 0;
-  margin-inline: auto;
-  width: max-content;
-  max-width: calc(100vw - 32px);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px;
-  padding: 8px;
-  border-radius: var(--radius);
-  background: rgba(19, 24, 36, 0.8);
-  border: 1px solid var(--line);
-  -webkit-backdrop-filter: blur(16px);
-          backdrop-filter: blur(16px);
-  z-index: 60;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-.showcase-nav.is-visible {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-.showcase-nav__thumb {
-  width: 40px; height: 40px;
-  padding: 0;
-  border: 1px solid transparent;
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--bg-raised);
-  cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-  font-family: var(--serif-num);
-  font-size: 11px;
-  color: var(--ink-dim);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.showcase-nav__thumb:hover,
-.showcase-nav__thumb.is-active {
-  opacity: 1;
-  border-color: var(--line-strong);
-  color: var(--ink);
-}
-.showcase-nav__thumb.is-active { border-color: var(--velocity); }
-
-/* ----- list layout on tablets / phones ----- */
-@media (max-width: 860px) {
-  .showcase__stack { gap: 16px; }
-  .showcase-card { padding: 20px; }
-  .showcase-card__grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-  .showcase-card__col--score { padding: 32px 20px; }
-  .showcase-nav { display: none; }
-}
-
-/* ============================================================
-   RESPONSIVE / OVERFLOW FIXES
-   ============================================================ */
-
-/* Safety net: nothing on the page can ever create a sideways scrollbar. */
-body { overflow-x: clip; }
-
-@media (max-width: 760px) {
-  /* the nav links used to vanish on phones; keep them as a swipeable strip */
-  .nav-inner { flex-wrap: wrap; gap: 8px 20px; padding: 12px 20px; }
-  nav.links {
-    display: flex;
-    width: 100%;
-    gap: 20px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  nav.links::-webkit-scrollbar { display: none; }
-}
-
-@media (max-width: 700px) {
-  /* wide tables scroll inside themselves instead of stretching the page */
-  table.inputs,
-  table.interp,
-  .feed-table {
-    display: block;
-    max-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-
-@media (max-width: 600px) {
-  .wrap { padding: 0 20px; }
-  .legal-panel { padding: 24px; }
-  .compare-panel { padding: 20px; }
-}
-
-/* ============================================================
-   LENIS (optional smooth scroll, only applies if Lenis is loaded)
-   ============================================================ */
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-.lenis.lenis-stopped { overflow: hidden; }
