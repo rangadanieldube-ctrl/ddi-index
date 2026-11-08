@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How the DDI Works — DUBE-Dropleton Index</title>
+<title>How the DDI Works ,  DUBE-Dropleton Index</title>
 <meta name="description" content="The concept, formula, methodology, and practical uses of the DUBE-Dropleton Index (DDI).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-</head>
+<link rel="stylesheet" href="vision.css"></head>
 <body>
 
 <header class="site-nav">
@@ -30,9 +30,9 @@
 
 <section style="border-top:none; padding-bottom: 60px;">
   <div class="wrap" style="padding-top: 70px;">
-    <p class="eyebrow">Proprietary analytical framework</p>
+    <p class="eyebrow">Independent company analysis</p>
     <h1 class="thesis" style="font-size: clamp(28px, 3.6vw, 42px);">How the DUBE&ndash;Dropleton Index works</h1>
-    <p class="sub" style="max-width: 60ch;">The concept behind the index, the formula, how each component is scored, where it's useful in practice, and who built it. <a href="index.html" style="color:var(--velocity)">&larr; Back to the ratings</a></p>
+    <p class="sub" style="max-width: 60ch;">Here's how I calculate the scores, what they mean and where the framework can be useful. <a href="index.html" style="color:var(--velocity)">&larr; Back to the ratings</a></p>
   </div>
 </section>
 
@@ -48,12 +48,12 @@
       <div>
         <p>In 2014, physicists confirmed the existence of the <strong>dropleton</strong>, a quasiparticle that behaves like a tiny liquid droplet inside a solid. It has an unusually high energy density and exists for only a few hundred femtoseconds before collapsing, giving the surrounding material very little time to respond.</p>
         <p>The DDI uses the dropleton as an analogy for a business condition that doesn't have a widely established name. A company in the <strong>Dropleton State</strong> can be financially healthy, with strong assets, a good market position, and sound long-term fundamentals, yet still struggle to act quickly enough when a short-lived, high-intensity opportunity appears. By the time the company is able to respond, the opportunity may already be gone.</p>
-        <p class="pull-note">The energy is there. The response is not. Conventional metrics were never built to measure the distance between the two.</p>
+        <p class="pull-note">The question is whether the company can use its resources before an opportunity passes.</p>
       </div>
       <div class="compare-panel">
         <div class="compare-head">
           <div>Conventional metric</div>
-          <div>What it actually answers</div>
+          <div>What it answers</div>
         </div>
         <div class="compare-row">
           <div class="metric-name">Liquidity ratio</div>
@@ -81,7 +81,7 @@
     <div class="section-head">
       <div>
         <p class="section-tag">02 &nbsp;Methodology</p>
-        <h2>Three components, one formula</h2>
+        <h2>How the score is calculated</h2>
         <p class="lede">Each component is scored 1&ndash;10 from observable, publicly available data. The formula combines structural weight, sector pressure, and actual response speed into a single index.</p>
       </div>
     </div>
@@ -90,7 +90,7 @@
       <div class="comp-index"><span class="num">01</span>ADS</div>
       <div class="comp-body">
         <h3>Asset Density Score</h3>
-        <p class="what">How much value is structurally locked in the company relative to its deployable capital. A high ADS marks a company with significant assets that cannot be rapidly mobilised &mdash; the classic Dropleton condition.</p>
+        <p class="what">How much of the company's value is tied up in assets it can't use quickly. A high ADS means less flexibility when an opportunity needs a quick response.</p>
         <table class="inputs">
           <tr><th>Input</th><th>Source</th><th>Signals</th></tr>
           <tr><td>Total assets &divide; liquid assets ratio</td><td>Annual report / financial statements</td><td>How locked the balance sheet is</td></tr>
@@ -109,7 +109,7 @@
       <div class="comp-index"><span class="num">02</span>OWS</div>
       <div class="comp-body">
         <h3>Opportunity Window Score</h3>
-        <p class="what">How frequently and intensely short-window opportunities appear in the company's operating sector. A high OWS means the sector regularly produces brief, high-value moments &mdash; raising the pressure on response velocity.</p>
+        <p class="what">How often the company's market creates opportunities that don't last long. A high OWS means the company regularly needs to act quickly.</p>
         <table class="inputs">
           <tr><th>Input</th><th>Source</th><th>Signals</th></tr>
           <tr><td>Sector tender cycle length</td><td>Public procurement databases</td><td>How short the windows are</td></tr>
@@ -128,7 +128,7 @@
       <div class="comp-index"><span class="num">03</span>RVS</div>
       <div class="comp-body">
         <h3>Response Velocity Score</h3>
-        <p class="what">How fast the company actually moves when windows appear, relative to its size and capacity. This is the decisive component &mdash; a company with high ADS and high OWS but <em>high</em> RVS is capturing windows despite its structural weight. That combination is rare and significant.</p>
+        <p class="what">How quickly the company responds, given its size and resources. A high RVS lowers the overall DDI: even a company with substantial fixed assets can act quickly enough to use an opportunity.</p>
         <table class="inputs">
           <tr><th>Input</th><th>Source</th><th>Signals</th></tr>
           <tr><td>Hiring surge speed during competitor downturns</td><td>Job posting frequency</td><td>Decision and execution speed</td></tr>
@@ -145,7 +145,7 @@
 
     <div class="formula-block">
       <div class="formula">DDI &nbsp;=&nbsp; (<span class="e">ADS</span> &times; <span class="e">OWS</span>) &divide; <span class="v">RVS</span></div>
-      <div class="example">Example &mdash; ADS 8, OWS 7, RVS 3 &nbsp;&rarr;&nbsp; DDI = (8 &times; 7) &divide; 3 = 18.7</div>
+      <div class="example">Example : ADS 8, OWS 7, RVS 3 &nbsp;&rarr;&nbsp; DDI = (8 &times; 7) &divide; 3 = 18.7</div>
     </div>
 
     <table class="interp">
@@ -153,7 +153,7 @@
       <tr>
         <td class="range">Below 2.0</td>
         <td class="state"><span class="state-tag state-sub">Sub-Dropleton</span></td>
-        <td>Rare. The company captures windows faster than its size suggests &mdash; an exceptional agility signal worth watching closely.</td>
+        <td>Rare. The company captures windows faster than its size suggests : an exceptional agility signal worth watching closely.</td>
       </tr>
       <tr>
         <td class="range">2.0 &ndash; 4.9</td>
@@ -163,7 +163,7 @@
       <tr>
         <td class="range">5.0 &ndash; 7.9</td>
         <td class="state"><span class="state-tag state-drop">Dropleton State</span></td>
-        <td>The classic condition. Strong assets, significant opportunity cost from missed windows &mdash; likely unquantified internally.</td>
+        <td>The classic condition. Strong assets, significant opportunity cost from missed windows : likely unquantified internally.</td>
       </tr>
       <tr>
         <td class="range">8.0 and above</td>
@@ -179,8 +179,8 @@
     <div class="section-head">
       <div>
         <p class="section-tag">03 &nbsp;Practical Use</p>
-        <h2>Why this number matters in real life</h2>
-        <p class="lede">The DDI is designed to answer a practical question: what would someone actually do differently if they knew a company's score?</p>
+        <h2>How to use the score</h2>
+        <p class="lede">A score is a starting point for research. The reasoning behind it matters as much as the number.</p>
       </div>
     </div>
 
@@ -192,12 +192,12 @@
       </div>
       <div class="use-card">
         <span class="use-mark" style="background:var(--velocity)"></span>
-        <h4>An internal diagnostic for boards</h4>
+        <h4>Reviewing internal decisions</h4>
         <p>A company could use the DDI to identify where its own constraints are coming from. A low response score, for example, might point to slow decision-making rather than a shortage of capital. That leads to a very different conversation about what needs to change.</p>
       </div>
       <div class="use-card">
         <span class="use-mark" style="background:var(--energy)"></span>
-        <h4>An investment research signal</h4>
+        <h4>Supporting investment research</h4>
         <p>A Dropleton State reading can flag a company whose fundamentals remain sound while its ability to respond to opportunities is weakening. For an investor, that could be a risk worth accounting for, or the starting point for a turnaround thesis if the trend begins to improve.</p>
       </div>
       <div class="use-card">
@@ -254,7 +254,7 @@
     </div>
     <div class="legal-panel">
       <h3>Ownership</h3>
-      <p>The DUBE&ndash;Dropleton Index &mdash; its name, formula, component definitions (Asset Density Score, Opportunity Window Score, Response Velocity Score), scoring methodology, interpretation ranges, and published written analyses &mdash; is an original proprietary framework authored by <strong>Daniel Ranga Dube</strong>. It is not open-source, public-domain, or freely licensed material.</p>
+      <p>The DUBE&ndash;Dropleton Index : its name, formula, component definitions (Asset Density Score, Opportunity Window Score, Response Velocity Score), scoring methodology, interpretation ranges, and published written analyses : is an original proprietary framework authored by <strong>Daniel Ranga Dube</strong>. It is not open-source, public-domain, or freely licensed material.</p>
 
       <h3>Restricted use</h3>
       <p>No part of this framework may be reproduced, republished, rebranded, taught, or commercially applied without prior written permission. This includes: presenting the DDI or its methodology under a different name; publishing company scores generated using this framework without attribution; or building software, reports, or consulting services around the DDI without a licensing agreement.</p>
@@ -278,7 +278,7 @@
 <footer>
   <div class="wrap footer-inner">
     <a href="#top" class="wordmark"><span class="dot"></span>DDI</a>
-    <p>&copy; <span id="year"></span> Daniel Ranga Dube &mdash; DUBE&ndash;Dropleton Index. All rights reserved.</p>
+    <p>&copy; <span id="year"></span> Daniel Ranga Dube : DUBE&ndash;Dropleton Index. All rights reserved.</p>
   </div>
 </footer>
 

@@ -286,7 +286,7 @@ function buildShowcaseCard(company, index, total) {
           ${barHTML("rvs", "RVS", company.rvs)}
         </div>
         <div class="showcase-card__actions">
-          <a class="showcase-card__btn showcase-card__btn--primary" href="${href}">View Full Report</a>
+          <a class="showcase-card__btn showcase-card__btn--primary" href="${href}">Read the report</a>
           <a class="showcase-card__btn showcase-card__btn--ghost" href="${href}" aria-label="Open ${name} report">&#8599;</a>
         </div>
       </div>
@@ -444,4 +444,11 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCompanies();
   initShowcase();
   initSmoothScroll();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const directory = document.getElementById('rating-directory');
+  if (!directory) return;
+  document.getElementById('coverage-count').textContent = getCompanies().length + ' companies';
+  directory.innerHTML = getCompanies().map(c => `<a class="directory-link" href="${reportURL(c)}"><span>${escapeHTML(c.name)}</span><b>${calculateDDI(c.ads,c.ows,c.rvs).toFixed(1)}</b></a>`).join('');
 });

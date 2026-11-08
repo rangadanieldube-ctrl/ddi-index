@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DDI — DUBE-Dropleton Index | Ratings</title>
-<meta name="description" content="Company ratings under the DUBE-Dropleton Index (DDI) — a proprietary metric measuring the gap between structural capacity and response velocity.">
+<title>DDI ,  DUBE-Dropleton Index | Ratings</title>
+<meta name="description" content="Company ratings under the DUBE-Dropleton Index (DDI) ,  a proprietary metric measuring the gap between structural capacity and response velocity.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="vision.css"><link rel="stylesheet" href="atmosphere.css">
 </head>
-<body>
+<body class="ratings-page">
 
 <header class="site-nav">
   <div class="nav-inner">
     <a href="#top" class="wordmark"><span class="dot"></span>DDI</a>
     <nav class="links">
       <a href="index.html">Ratings</a>
-      <a href="methodology.html">How It Works</a>
+      <a href="methodology.html">How it works</a>
       <a href="methodology.html#about">About</a>
       <a href="methodology.html#legal">Legal</a>
     </nav>
@@ -28,39 +28,29 @@
 <section class="hero" style="border-top:none; padding-top: 70px;">
   <div class="wrap hero-inner">
     <div>
-      <p class="eyebrow">Proprietary analytical framework</p>
-      <h1 class="thesis">The company has the energy.<br>It does not have <em>the velocity</em>.</h1>
-      <p class="sub">The DUBE&ndash;Dropleton Index (DDI) rates companies on the gap between what they can structurally deploy and how fast they actually move when a short, high-value window opens. Ratings below. The full methodology is one click away.</p>
+      <p class="eyebrow">Independent company analysis</p>
+      <h1 class="thesis">The company has the resources.<br>Can it move <em>in time?</em></h1>
+      <p class="sub">A company can have money, people and infrastructure and still take too long to act. The DUBE&ndash;Dropleton Index (DDI) looks at that gap. Read the company reports to see how the scores are assigned.</p>
       <div class="cta-row">
         <a href="#ratings" class="btn btn-primary">See the ratings</a>
         <a href="methodology.html" class="btn btn-ghost">How the index works</a>
       </div>
     </div>
-    <div class="droplet-stage">
-      <div class="lattice-frame"></div>
-      <div class="droplet-halo"></div>
-      <div class="metaball-collapse-wrap">
-        <div class="metaball-stage">
-          <div class="meta"></div>
-          <div class="meta"></div>
-        </div>
-      </div>
-      <span class="droplet-label">energy density / brief existence</span>
-    </div>
+    <div class="signal-art" data-blob="merge" aria-label="Abstract illustration of energy and response"><div class="signal-top"><span>THE DROPLETON FIELD</span><span>FIG. 01</span></div><div class="orbital orbital-a"></div><div class="orbital orbital-b"></div><div class="orbital orbital-c"></div><div class="blob-original" aria-hidden="true"><div class="droplet-halo"></div><div class="metaball-collapse-wrap"><div class="metaball-stage"><div class="meta"></div><div class="meta"></div></div></div></div><div class="ribbon-blob" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="signal-core"></div><div class="signal-satellite"></div><div class="field-cross cross-a">+</div><div class="field-cross cross-b">+</div><div class="signal-bottom"><span>RESOURCES AND RESPONSE</span><strong>What happens when time runs out?</strong><div class="blob-picker" role="group" aria-label="Choose blob appearance"><button type="button" data-blob-choice="merge" aria-pressed="true">01 / Merge</button><button type="button" data-blob-choice="ribbon" aria-pressed="false">02 / Ribbon</button><button type="button" data-blob-choice="sculpt" aria-pressed="false">03 / Sculpt</button></div><span class="signal-caption">A VISUAL ANALOGY FOR THE INDEX</span></div></div>
   </div>
 </section>
 
-<section id="ratings" style="border-top:none;">
+<div class="wrap"><section class="index-overview" aria-label="Index overview"><div><span class="overview-label">THE COVERAGE</span><strong id="coverage-count">7 companies</strong><p>Read the reasoning behind each rating.</p></div><div><span class="overview-label">THE EQUATION</span><strong>(ADS × OWS) / RVS</strong><p>Capacity, opportunity and execution.</p></div><div><span class="overview-label">THE SIGNAL</span><strong>A higher score means a larger gap.</strong><p>See what contributes to each score.</p></div></section></div><section id="ratings" style="border-top:none;">
   <div class="wrap">
     <div class="section-head">
       <div>
         <p class="section-tag">Ratings</p>
-        <h2>Companies rated under the DDI</h2>
-        <p class="lede">Each entry scores Asset Density, Opportunity Window, and Response Velocity from public data, then resolves to a single DDI reading. Curious what the numbers mean? <a href="methodology.html" style="color:var(--velocity)">Read the full methodology &rarr;</a></p>
+        <h2>Company ratings</h2>
+        <p class="lede">Each report explains the company's assets, the opportunities it faces and how quickly it responds. The scores use public information and the author's judgement. <a href="methodology.html" style="color:var(--velocity)">Read the full methodology &rarr;</a></p>
       </div>
     </div>
 
-    <div class="scroll-cue" id="scroll-cue">
+    <div class="explorer-tools"><label>FIND A COMPANY<input id="company-search" type="search" placeholder="Search names or sectors…"></label><label>ORDER BY<select id="company-sort"><option value="original">Editorial order</option><option value="low">Lowest DDI first</option><option value="high">Highest DDI first</option></select></label><span id="results-count" role="status"></span></div><div class="rating-directory" id="rating-directory" aria-label="Company reports"></div><div class="scroll-cue" id="scroll-cue">
       <span id="scroll-cue-text">Scroll to see all ratings</span>
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -77,9 +67,9 @@
       <table class="feed-table">
         <tr><td>Annual reports / public filings</td><td>Manual per-report research</td><td class="status manual">MANUAL</td></tr>
         <tr><td>Public tender databases</td><td>Manual per-report research</td><td class="status manual">MANUAL</td></tr>
-        <tr><td>News sentiment &amp; frequency</td><td>Served via a lightweight proxy endpoint</td><td class="status live">LIVE-FEED READY</td></tr>
-        <tr><td>Search / market momentum trends</td><td>No stable public API &mdash; manual per-report</td><td class="status manual">MANUAL</td></tr>
-        <tr><td>Hiring / job-posting velocity</td><td>No public API available &mdash; manual per-report</td><td class="status manual">MANUAL</td></tr>
+        <tr><td>News sentiment &amp; frequency</td><td>Integration planned; not connected</td><td class="status live">PLANNED</td></tr>
+        <tr><td>Search / market momentum trends</td><td>No stable public API : manual per-report</td><td class="status manual">MANUAL</td></tr>
+        <tr><td>Hiring / job-posting velocity</td><td>No public API available : manual per-report</td><td class="status manual">MANUAL</td></tr>
       </table>
     </div>
     <!--
@@ -90,16 +80,16 @@
       Example:
         const res = await fetch('https://ddi-proxy.<yourdomain>.workers.dev/news?company=...');
         const data = await res.json();
-      Nothing calls an API key directly from this page — keys must never
+      Nothing calls an API key directly from this page ,  keys must never
       ship in client-side JS.
     -->
   </div>
 </section>
 
-<footer>
+<section class="signal-lab wrap" aria-labelledby="lab-title"><div><p class="section-tag">Interactive / The mechanics</p><h2 id="lab-title">Try the formula yourself.</h2><p class="lede">Move the sliders to see how each input changes the result. These values describe a made-up scenario.</p><a href="methodology.html" class="lab-method">Read the full methodology ↗</a></div><div class="lab-controls"><label>Asset density <output id="ads-value">6</output><input id="lab-ads" type="range" min="1" max="10" value="6"></label><label>Opportunity window <output id="ows-value">8</output><input id="lab-ows" type="range" min="1" max="10" value="8"></label><label>Response velocity <output id="rvs-value">9</output><input id="lab-rvs" type="range" min="1" max="10" value="9"></label></div><div class="lab-result" aria-live="polite"><span>SIMULATED DDI</span><strong id="lab-score">5.3</strong><span id="lab-state">Dropleton State</span></div></section><footer>
   <div class="wrap footer-inner">
     <a href="#top" class="wordmark"><span class="dot"></span>DDI</a>
-    <p>&copy; <span id="year"></span> Daniel Ranga Dube &mdash; DUBE&ndash;Dropleton Index. All rights reserved.</p>
+    <p>&copy; <span id="year"></span> Daniel Ranga Dube : DUBE&ndash;Dropleton Index. All rights reserved.</p>
   </div>
 </footer>
 
@@ -108,7 +98,7 @@
 </script>
 <script>
   // The droplet "collapses" at a random moment every ~6-14 seconds, then
-  // reforms — evoking the dropleton's brief, unpredictable existence
+  // reforms ,  evoking the dropleton's brief, unpredictable existence
   // without literally trying to run on a femtosecond timescale.
   (function(){
     var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -132,7 +122,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 <script src="data.js"></script>
-<script src="app.js"></script>
+<script src="app.js"></script><script src="vision.js"></script>
 
 </body>
 </html>

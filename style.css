@@ -1446,3 +1446,18 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: hidden; }
+
+/* Editorial refinement — retains the original DDI palette and card deck. */
+body{background-image:radial-gradient(ellipse at 85% 5%,rgba(62,215,200,.065),transparent 42%);}
+.site-nav{box-shadow:0 8px 32px #0002}.links a{transition:color .2s}.links a:hover{color:var(--velocity)}
+.ratings-page .hero{position:relative;overflow:clip;padding-bottom:56px;background:linear-gradient(120deg,transparent 55%,rgba(62,215,200,.025));}
+.ratings-page .thesis{font-size:clamp(38px,4.7vw,66px);line-height:1.09;letter-spacing:-.045em;max-width:720px;}
+.ratings-page .sub{color:#a8b1c2;line-height:1.85;margin-top:26px;max-width:56ch;}
+.eyebrow{letter-spacing:.17em;font-size:11px}.btn{border-radius:7px;transition:transform .2s,box-shadow .2s}.btn:hover{transform:translateY(-2px);box-shadow:0 9px 30px #0003}.btn-primary{background:var(--velocity);color:#071513}
+.droplet-stage{position:relative;border:1px solid #3ed7c81c;border-radius:50%;background:radial-gradient(circle,rgba(62,215,200,.09),transparent 68%);box-shadow:0 0 100px #3ed7c809;}
+.instrument-label{position:absolute;top:7%;left:12%;font:9px var(--serif-num);letter-spacing:.12em;color:var(--ink-dim)}.instrument-axis{position:absolute;bottom:12%;right:0;font:9px/1.8 var(--serif-num);color:var(--velocity);letter-spacing:.1em}.metaball-collapse-wrap{filter:saturate(.55)}
+.index-overview{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:28px;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line);padding:28px 0;margin:0 0 20px}.overview-label{font:10px var(--serif-num);letter-spacing:.14em;color:var(--velocity);display:block;margin-bottom:12px}.index-overview strong{font:500 18px var(--display);display:block}.index-overview p{font-size:12px;color:var(--ink-dim);margin-top:6px}
+.rating-directory{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:28px 0 38px}.directory-link{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px;border:1px solid var(--line);background:#10161f;border-radius:8px;text-decoration:none;transition:border-color .2s,transform .2s}.directory-link:hover{border-color:var(--velocity);transform:translateY(-3px)}.directory-link span{font-size:12px;line-height:1.4}.directory-link b{font:500 22px var(--serif-num);color:var(--velocity)}
+.showcase-card{border-radius:14px!important;box-shadow:0 24px 60px #0005!important}.showcase-card__btn{border-radius:6px!important}.feed-panel{border-radius:10px}.section-head h2{letter-spacing:-.035em}.lede{color:#a8b1c2}.scroll-cue{opacity:.7}
+@media(max-width:860px){.rating-directory{grid-template-columns:repeat(2,1fr)}.index-overview{grid-template-columns:1fr;gap:22px}.instrument-axis{right:5%}.ratings-page .hero{padding-top:40px!important}.ratings-page .thesis{font-size:clamp(36px,7vw,55px)}}
+@media(prefers-reduced-motion:reduce){.btn:hover,.directory-link:hover{transform:none}}
