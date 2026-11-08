@@ -1,0 +1,9 @@
+(()=>{
+ const track=document.createElement('div');track.className='reading-progress';track.setAttribute('aria-hidden','true');track.innerHTML='<div class="reading-progress__fill"></div>';
+ const button=document.createElement('button');button.type='button';button.className='scroll-return';button.setAttribute('aria-label','Back to top');button.title='Back to top';button.innerHTML='<svg viewBox="0 0 44 44" aria-hidden="true"><circle class="scroll-return__track" cx="22" cy="22" r="20"/><circle class="scroll-return__arc" cx="22" cy="22" r="20"/></svg><span class="scroll-return__label" aria-hidden="true">0%</span>';
+ document.body.append(track,button);const fill=track.firstElementChild,arc=button.querySelector('.scroll-return__arc'),label=button.querySelector('.scroll-return__label');let queued=false;
+ function update(){queued=false;const total=document.documentElement.scrollHeight-window.innerHeight;const progress=total>0?Math.min(1,Math.max(0,window.scrollY/total)):0;fill.style.transform=`scaleX(${progress})`;arc.style.strokeDashoffset=String(126*(1-progress));label.textContent=Math.round(progress*100)+'%';button.classList.toggle('is-visible',window.scrollY>180);}
+ function schedule(){if(!queued){queued=true;requestAnimationFrame(update);}}
+ window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);window.addEventListener('load',schedule);if('ResizeObserver'in window)new ResizeObserver(schedule).observe(document.body);if(document.fonts)document.fonts.ready.then(schedule);
+ button.addEventListener('click',()=>{const destination=document.querySelector('h1');if(destination){destination.setAttribute('tabindex','-1');destination.focus({preventScroll:true});}window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});});update();
+})();
